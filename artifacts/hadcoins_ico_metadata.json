@@ -1,0 +1,153 @@
+{
+	"compiler": {
+		"version": "0.4.26+commit.4563c3fc"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "investor",
+						"type": "address"
+					}
+				],
+				"name": "equity_in_usd",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "investor",
+						"type": "address"
+					},
+					{
+						"name": "hadcoins_sold",
+						"type": "uint256"
+					}
+				],
+				"name": "sel_hadcoins",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "total_hadcoins_bought",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "investor",
+						"type": "address"
+					},
+					{
+						"name": "usd_invested",
+						"type": "uint256"
+					}
+				],
+				"name": "buy_hadcoins",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "usd_to_hadcoins",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "investor",
+						"type": "address"
+					}
+				],
+				"name": "equity_in_hadcoins",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "max_hadcoins",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"hadcoins_ico.sol": "hadcoins_ico"
+		},
+		"evmVersion": "byzantium",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"hadcoins_ico.sol": {
+			"keccak256": "0x3302604d4c41869efba23de411cb78904c6b671ccd14de20b4ae02074ad4b8c9",
+			"urls": [
+				"bzzr://632cc2bbc21fa26cd3e896315d87d766e61c5bec7c51f9805a57b6917815760c"
+			]
+		}
+	},
+	"version": 1
+}
