@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 Store</title>
+    <link rel="stylesheet" href="Jual.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Web3 Store</h1>
+        <div id="wallet-info">
+            <button id="connect-btn">Connect Wallet</button>
+            <p id="wallet-address"></p>
+        </div>
+    </div>
+
+    <div id="product-list">
+        <h2>Products</h2>
+        <div id="products"></div>
+    </div>
+
+    <div id="add-product">
+        <h2>Add New Product</h2>
+        <input type="text" id="name" placeholder="Product Name" />
+        <input type="text" id="category" placeholder="Category" />
+        <input type="number" id="price" placeholder="Price (in ETH)" />
+        <input type="number" id="stock" placeholder="Stock" />
+        <input type="text" id="imageHash" placeholder="Image Hash" />
+        <button id="add-product-btn">Add Product</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="jual.js"></script>
+</body>
+</html>
