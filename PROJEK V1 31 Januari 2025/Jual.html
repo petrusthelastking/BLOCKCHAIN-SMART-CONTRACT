@@ -1,36 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web3 Store</title>
-    <link rel="stylesheet" href="Jual.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web3 Store - Single Page Layout</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Link ke file CSS eksternal -->
+  <link rel="stylesheet" href="Jual.css" />
 </head>
 <body>
-    <div class="header">
-        <h1>Web3 Store</h1>
-        <div id="wallet-info">
-            <button id="connect-btn">Connect Wallet</button>
-            <p id="wallet-address"></p>
+
+  <nav class="main-nav">
+    <ul>
+      <!-- Setiap menu mengacu pada id section yang ingin ditampilkan -->
+      <li><a href="#home-section" class="nav-link active">Home</a></li>
+      <li><a href="#product-section" class="nav-link">Produk</a></li>
+      <li><a href="#add-product-section" class="nav-link">Tambah Produk</a></li>
+      <li><a href="#transaction-section" class="nav-link">Riwayat Pembelian</a></li>
+    </ul>
+  </nav>
+  
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-top">
+      <div class="logo">Web3Store</div>
+      <div class="wallet-section">
+        <button class="connect-btn" id="connect-btn">Connect Wallet</button>
+        <div id="wallet-profile" class="wallet-profile" style="display: none;">
+          <i class="fas fa-user"></i>
+          <span id="profile-address"></span>
         </div>
+      </div>
     </div>
+  </header>
 
-    <div id="product-list">
-        <h2>Products</h2>
-        <div id="products"></div>
-    </div>
+  <!-- Main Content (selalu tampil, sehingga landing page tidak kosong) -->
+  <main class="container" id="main-content">
+    <!-- Section Home -->
+    <section id="home-section" class="section home-section">
+      <!-- Hero Section -->
+      <div class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1>Selamat Datang di Web3 Store</h1>
+          <p>Platform e-commerce berbasis blockchain yang menghadirkan produk digital dan fisik terbaik dengan teknologi terdepan.</p>
+          <a href="#product-section" class="action-btn">Jelajahi Produk Kami</a>
+        </div>
+      </div>
 
-    <div id="add-product">
-        <h2>Add New Product</h2>
-        <input type="text" id="name" placeholder="Product Name" />
-        <input type="text" id="category" placeholder="Category" />
-        <input type="number" id="price" placeholder="Price (in ETH)" />
-        <input type="number" id="stock" placeholder="Stock" />
-        <input type="text" id="imageHash" placeholder="Image Hash" />
-        <button id="add-product-btn">Add Product</button>
-    </div>
+      <!-- Features Section -->
+      <section class="features card">
+        <h2 class="section-title">Keunggulan Kami</h2>
+        <div class="features-container">
+          <div class="feature-item">
+            <i class="fas fa-lock"></i>
+            <h3>Keamanan Tinggi</h3>
+            <p>Transaksi yang dijamin oleh teknologi blockchain yang aman dan transparan.</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-bolt"></i>
+            <h3>Inovatif & Cepat</h3>
+            <p>Platform berbasis blockchain dengan kecepatan tinggi dan inovasi terus menerus.</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Mudah & Terpercaya</h3>
+            <p>Proses belanja yang simpel dengan pelayanan pelanggan profesional.</p>
+          </div>
+        </div>
+      </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-    <script src="jual.js"></script>
+      <!-- Testimonials Section -->
+      <section class="testimonials card">
+        <h2 class="section-title">Apa Kata Mereka?</h2>
+        <div class="testimonials-container">
+          <div class="testimonial-item">
+            <p>"Web3 Store memberikan pengalaman belanja yang luar biasa dan aman. Teknologi blockchain-nya benar-benar terpercaya!"</p>
+            <h4>- Andi</h4>
+          </div>
+          <div class="testimonial-item">
+            <p>"Produk berkualitas dengan pelayanan cepat. Platform inovatif yang saya tunggu-tunggu."</p>
+            <h4>- Siti</h4>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Section Produk -->
+    <section id="product-section" class="section" style="display: none;">
+      <h2 class="section-title">Produk Unggulan</h2>
+      <div class="masonry-grid" id="product-list">
+        <p>Belum ada produk untuk ditampilkan.</p>
+      </div>
+    </section>
+    
+    <!-- Section Tambah Produk -->
+    <section id="add-product-section" class="section" style="display: none;">
+      <div class="card form-card">
+        <h2>Tambah Produk Baru</h2>
+        <form class="admin-form">
+          <input type="text" id="name" placeholder="Nama Produk" required>
+          <input type="text" id="category" placeholder="Kategori" required>
+          <input type="number" id="price" placeholder="Harga (ETH)" step="0.0001" required>
+          <input type="number" id="stock" placeholder="Stok" min="1" required>
+          <input type="text" id="imageHash" placeholder="IPFS Image Hash" required>
+          <button class="action-btn" type="button" id="add-product-btn">Tambah Produk</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Section Riwayat Pembelian -->
+    <section id="transaction-section" class="section" style="display: none;">
+      <div class="card transaction-history">
+        <h2>Riwayat Pembelian</h2>
+        <div id="transaction-list">
+          <p>Belum ada transaksi.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Web3 Store. All rights reserved.</p>
+  </footer>
+
+  <!-- Sertakan Ethers.js dan file JavaScript eksternal -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script>
+    // Navigasi menu: tampilkan section yang sesuai saat menu diklik
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+
+        document.querySelectorAll('main .section').forEach(section => {
+          section.style.display = 'none';
+        });
+        let targetSection = document.querySelector(this.getAttribute('href'));
+        if (targetSection) {
+          targetSection.style.display = 'block';
+        }
+      });
+    });
+  </script>
+  <script src="jual.js"></script>
 </body>
 </html>
