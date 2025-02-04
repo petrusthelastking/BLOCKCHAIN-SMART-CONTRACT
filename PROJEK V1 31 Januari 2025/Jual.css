@@ -1,75 +1,537 @@
+/* ==========================
+   Variabel Warna & Dasar
+========================== */
+:root {
+  --accent-color: #ffcc00;
+  --primary-color: #ff4d4d;
+  --secondary-color: #ffffff;
+  --background-color: #1f1f1f;
+  --text-color: #f1f1f1;
+  --transition-speed: 0.3s;
+  --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* TRANSISI SECTION */
+.section {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.section.active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* ANIMASI GLITCH */
+.section-title {
+  position: relative;
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
+/* LOADING OVERLAY */
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.loader {
+  border: 8px solid rgba(255,255,255,0.1);
+  border-top: 8px solid var(--accent-color);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* PARTIKEL BACKGROUND */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Reset & Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
+  font-family: 'Montserrat', sans-serif;
+  background: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
 }
 
-.header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    text-align: center;
+/* Header */
+.main-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  padding: 1rem 2rem;
+  border-bottom: 2px solid var(--accent-color);
 }
 
-#wallet-info {
-    text-align: center;
-    margin-top: 10px;
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#wallet-address {
-    font-weight: bold;
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
 }
 
-#product-list {
-    padding: 20px;
+.wallet-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-#products {
-    display: flex;
-    flex-wrap: wrap;
+.connect-btn,
+.action-btn {
+  position: relative;  /* Untuk ripple effect */
+  overflow: hidden;    /* Sembunyikan ripple yang keluar dari batas */
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background var(--transition-speed), transform var(--transition-speed);
 }
 
-.product {
-    background-color: white;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    text-align: center;
+.connect-btn:hover,
+.action-btn:hover {
+  background: var(--accent-color);
 }
 
-.product img {
-    max-width: 100%;
-    border-radius: 10px;
+/* Ripple Effect untuk Tombol (tambahan) */
+.ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
 }
 
-#add-product {
-    padding: 20px;
-    background-color: #ffffff;
-    margin-top: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Navigasi */
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+  transform: translateY(30px);
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+.main-nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 2rem;
 }
 
-button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
+.nav-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  position: relative;
+  transition: color var(--transition-speed);
 }
 
-button:hover {
-    background-color: #45a049;
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent-color);
 }
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width var(--transition-speed);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Container & Section */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  margin-top: 150px;
+}
+
+/* Hero, Features, Testimonials, Card & Form, Masonry, Product Card, Footer */
+/* ... (sisa CSS asli Anda, tidak diubah) ... */
+
+
+/* Card & Form */
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  margin: 2rem auto;
+  max-width: 1200px;
+  transition: transform var(--transition-speed);
+}
+
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.form-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-card input,
+.form-card button {
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color var(--transition-speed);
+}
+
+.form-card input:focus {
+  border-color: var(--accent-color);
+}
+
+.action-btn {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background var(--transition-speed), transform var(--transition-speed);
+}
+
+.action-btn:hover {
+  background: var(--accent-color);
+  transform: scale(1.03);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 90vh;
+  margin-left: calc(-50vw + 50%);
+  margin-top: calc(-45vw + 50%);
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('NIke.jpeg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 1rem;
+  max-width: 800px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.hero .action-btn:hover {
+  background: var(--accent-color);
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Features Section */
+.features {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.features .section-title {
+  margin-bottom: 2rem; /* Sesuaikan nilainya sesuai dengan ruang yang diinginkan */
+}
+
+.features-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.feature-item {
+  background: rgba(255, 255, 255, 0.05) !important;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--accent-color);
+  opacity: 1 !important;
+  transform: none !important;
+  display: block !important;
+}
+
+/* Tambahkan ini untuk override AOS */
+[data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+}
+
+.feature-item i {
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+
+.feature-item p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.testimonials .section-title {
+  margin-bottom: 2rem; /* Sesuaikan nilainya jika perlu */
+}
+
+.testimonials-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.testimonial-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--box-shadow);
+}
+
+.testimonial-item p {
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.testimonial-item h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+/* Masonry Grid untuk Produk */
+.masonry-grid {
+  column-count: 3;
+  column-gap: 1rem;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+/* Kartu Produk */
+.product-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--box-shadow);
+  transition: transform var(--transition-speed);
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+}
+
+.img-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  display: block;
+  transition: transform var(--transition-speed);
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.1);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+}
+
+.product-card:hover .overlay {
+  opacity: 1;
+}
+
+.product-info {
+  padding: 1rem;
+}
+
+.product-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.product-info .price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.product-info p {
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.wallet-spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 2px solid var(--accent-color);
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 992px) {
+  .masonry-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .masonry-grid {
+    column-count: 1;
+  }
+  .logo {
+    font-size: 1.8rem;
+  }
+}
+
