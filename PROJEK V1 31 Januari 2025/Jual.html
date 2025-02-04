@@ -10,12 +10,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <!-- Link ke file CSS eksternal -->
   <link rel="stylesheet" href="Jual.css" />
+  <!-- AOS CSS (jika digunakan) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
 <body>
 
+  <!-- NAVIGASI -->
   <nav class="main-nav">
     <ul>
-      <!-- Setiap menu mengacu pada id section yang ingin ditampilkan -->
       <li><a href="#home-section" class="nav-link active">Home</a></li>
       <li><a href="#product-section" class="nav-link">Produk</a></li>
       <li><a href="#add-product-section" class="nav-link">Tambah Produk</a></li>
@@ -23,12 +25,12 @@
     </ul>
   </nav>
   
-  <!-- Header -->
+  <!-- HEADER -->
   <header class="main-header">
     <div class="header-top">
       <div class="logo">Web3Store</div>
       <div class="wallet-section">
-        <button class="connect-btn" id="connect-btn">Connect Wallet</button>
+        <button class="connect-btn action-btn" id="connect-btn">Connect Wallet</button>
         <div id="wallet-profile" class="wallet-profile" style="display: none;">
           <i class="fas fa-user"></i>
           <span id="profile-address"></span>
@@ -37,51 +39,49 @@
     </div>
   </header>
 
-  <!-- Main Content (selalu tampil, sehingga landing page tidak kosong) -->
+  <!-- MAIN CONTENT -->
   <main class="container" id="main-content">
-    <!-- Section Home -->
-    <section id="home-section" class="section home-section">
-      <!-- Hero Section -->
+    <!-- SECTION HOME -->
+    <section id="home-section" class="section home-section active" data-aos="fade-up">
+      <!-- HERO -->
       <div class="hero">
         <div class="hero-overlay"></div>
-        <div class="hero-content">
+        <div class="hero-content" data-aos="zoom-in">
           <h1>Selamat Datang di Web3 Store</h1>
           <p>Platform e-commerce berbasis blockchain yang menghadirkan produk digital dan fisik terbaik dengan teknologi terdepan.</p>
           <a href="#product-section" class="action-btn">Jelajahi Produk Kami</a>
         </div>
       </div>
-
-      <!-- Features Section -->
+      <!-- FEATURES -->
       <section class="features card">
         <h2 class="section-title">Keunggulan Kami</h2>
         <div class="features-container">
-          <div class="feature-item">
+          <div class="feature-item" data-aos="flip-left">
             <i class="fas fa-lock"></i>
             <h3>Keamanan Tinggi</h3>
             <p>Transaksi yang dijamin oleh teknologi blockchain yang aman dan transparan.</p>
           </div>
-          <div class="feature-item">
+          <div class="feature-item" data-aos="flip-left" data-aos-delay="100">
             <i class="fas fa-bolt"></i>
             <h3>Inovatif & Cepat</h3>
             <p>Platform berbasis blockchain dengan kecepatan tinggi dan inovasi terus menerus.</p>
           </div>
-          <div class="feature-item">
+          <div class="feature-item" data-aos="flip-left" data-aos-delay="200">
             <i class="fas fa-shopping-cart"></i>
             <h3>Mudah & Terpercaya</h3>
             <p>Proses belanja yang simpel dengan pelayanan pelanggan profesional.</p>
           </div>
         </div>
       </section>
-
-      <!-- Testimonials Section -->
-      <section class="testimonials card">
+      <!-- TESTIMONIALS -->
+      <section class="testimonials card" data-aos="fade-up" data-aos-delay="300">
         <h2 class="section-title">Apa Kata Mereka?</h2>
         <div class="testimonials-container">
-          <div class="testimonial-item">
+          <div class="testimonial-item" data-aos="fade-right">
             <p>"Web3 Store memberikan pengalaman belanja yang luar biasa dan aman. Teknologi blockchain-nya benar-benar terpercaya!"</p>
             <h4>- Andi</h4>
           </div>
-          <div class="testimonial-item">
+          <div class="testimonial-item" data-aos="fade-left">
             <p>"Produk berkualitas dengan pelayanan cepat. Platform inovatif yang saya tunggu-tunggu."</p>
             <h4>- Siti</h4>
           </div>
@@ -89,16 +89,16 @@
       </section>
     </section>
 
-    <!-- Section Produk -->
-    <section id="product-section" class="section" style="display: none;">
+    <!-- SECTION PRODUK -->
+    <section id="product-section" class="section" style="display: none;" data-aos="fade-up">
       <h2 class="section-title">Produk Unggulan</h2>
       <div class="masonry-grid" id="product-list">
         <p>Belum ada produk untuk ditampilkan.</p>
       </div>
     </section>
     
-    <!-- Section Tambah Produk -->
-    <section id="add-product-section" class="section" style="display: none;">
+    <!-- SECTION TAMBAH PRODUK -->
+    <section id="add-product-section" class="section" style="display: none;" data-aos="fade-up">
       <div class="card form-card">
         <h2>Tambah Produk Baru</h2>
         <form class="admin-form">
@@ -112,8 +112,8 @@
       </div>
     </section>
 
-    <!-- Section Riwayat Pembelian -->
-    <section id="transaction-section" class="section" style="display: none;">
+    <!-- SECTION RIWAYAT PEMBELIAN -->
+    <section id="transaction-section" class="section" style="display: none;" data-aos="fade-up">
       <div class="card transaction-history">
         <h2>Riwayat Pembelian</h2>
         <div id="transaction-list">
@@ -123,31 +123,21 @@
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <!-- FOOTER -->
+  <footer class="footer" data-aos="fade-up">
     <p>&copy; 2025 Web3 Store. All rights reserved.</p>
   </footer>
 
-  <!-- Sertakan Ethers.js dan file JavaScript eksternal -->
+  <!-- EXTERNAL SCRIPTS (tanpa modifikasi fitur) -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-  <script>
-    // Navigasi menu: tampilkan section yang sesuai saat menu diklik
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-        this.classList.add('active');
-
-        document.querySelectorAll('main .section').forEach(section => {
-          section.style.display = 'none';
-        });
-        let targetSection = document.querySelector(this.getAttribute('href'));
-        if (targetSection) {
-          targetSection.style.display = 'block';
-        }
-      });
-    });
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+  <!-- Lottie (jika diperlukan) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
+  <script src="animations.js"></script>
+  <!-- File JavaScript Utama Anda (fitur asli) -->
   <script src="jual.js"></script>
 </body>
 </html>
