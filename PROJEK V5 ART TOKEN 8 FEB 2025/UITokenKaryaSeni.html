@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArtToken Marketplace</title>
+  <!-- Google Fonts: menggunakan font Inter untuk tampilan modern -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Link ke file CSS eksternal -->
+  <link rel="stylesheet" href="UITokenKaryaSeni.css">
+</head>
+<body>
+  <!-- Header: Navigasi Fixed dengan efek glassmorphism -->
+  <header class="header">
+    <div class="container nav-container">
+      <div class="logo">ArtToken</div>
+      <nav class="nav">
+        <ul>
+          <li><a href="#" id="homeLink" class="active">Home</a></li>
+          <li><a href="#" id="buyLink">Beli Token</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="connectWalletBtn" class="btn">Connect Wallet</button>
+        <span id="walletAddress" class="wallet-address"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section Home -->
+  <section id="home-section" class="content-section active">
+    <!-- Hero Section dengan background animasi gradient dan overlay gelap -->
+    <section class="hero">
+      <div class="container hero-container">
+        <h1 class="hero-title">ArtToken Marketplace</h1>
+        <p class="hero-subtitle">Trade, beli, dan kelola token Anda dengan mudah.</p>
+      </div>
+    </section>
+    <!-- Info Section -->
+    <section class="info-section">
+      <div class="container">
+        <h2>Apa Itu ArtToken?</h2>
+        <p>ArtToken adalah token digital yang dirancang khusus untuk mendukung ekosistem seni digital. Token ini berguna untuk:</p>
+        <ul>
+          <li>Mendukung transaksi di marketplace karya seni digital.</li>
+          <li>Memfasilitasi kepemilikan dan autentikasi karya seni.</li>
+          <li>Mendorong partisipasi dalam komunitas seni yang terdesentralisasi.</li>
+        </ul>
+        <p><strong>Jaringan:</strong> ArtToken dibangun di atas jaringan <em>Ethereum</em>, yang terkenal dengan desentralisasi dan keamanannya.</p>
+        <p><strong>Keamanan &amp; Transparansi:</strong> Dengan menggunakan smart contract yang telah diaudit, setiap transaksi aman dan tercatat secara publik di blockchain, sehingga menjamin transparansi penuh.</p>
+      </div>
+    </section>
+    <!-- Tutorial Section -->
+    <section class="tutorial-section">
+      <div class="container">
+        <h2>Tutorial Penggunaan</h2>
+        <ol>
+          <li><strong>Connect Wallet:</strong> Klik tombol <em>Connect Wallet</em> untuk menghubungkan dompet digital (misalnya MetaMask) Anda.</li>
+          <li><strong>Beli Token:</strong> Pindah ke menu <em>Beli Token</em> dan masukkan jumlah token yang ingin Anda beli.</li>
+          <li><strong>Konfirmasi Transaksi:</strong> Ikuti petunjuk yang muncul pada dompet Anda untuk menyelesaikan transaksi.</li>
+          <li><strong>Cek Saldo:</strong> Setelah transaksi, kembali ke menu <em>Beli Token</em> untuk memeriksa saldo token Anda.</li>
+        </ol>
+      </div>
+    </section>
+  </section>
+
+  <!-- Section Beli Token -->
+  <section id="buy-section" class="content-section">
+    <div class="container">
+      <!-- Hero Section khusus Beli Token -->
+      <section class="hero">
+        <div class="container hero-container">
+          <h1 class="hero-title">Beli Token ArtToken</h1>
+          <p class="hero-subtitle">Masukkan jumlah token yang ingin Anda beli dan ikuti instruksi transaksi.</p>
+          <button id="heroConnectBtnBuy" class="btn hero-btn">Connect Wallet</button>
+        </div>
+      </section>
+      <!-- Konten Utama -->
+      <main class="container">
+        <section class="cards-section">
+          <!-- Card Beli Token -->
+          <div class="card">
+            <h2>Beli Token</h2>
+            <label for="tokenAmount">Jumlah Token:</label>
+            <input type="number" id="tokenAmount" placeholder="Contoh: 1 untuk 1 token">
+            <button id="buyTokenBtn" class="btn">Beli Token</button>
+            <p id="status" class="status-msg"></p>
+          </div>
+          <!-- Card Cek Saldo -->
+          <div class="card">
+            <h2>Cek Saldo</h2>
+            <button id="checkBalanceBtn" class="btn">Cek Saldo</button>
+            <p id="balanceDisplay" class="status-msg">Saldo token: 0</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 ArtToken Marketplace</p>
+    </div>
+  </footer>
+
+  <!-- Sertakan library Ethers dan file JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script src="UITokenKaryaSeni.js"></script>
+  <script>
+    // JavaScript untuk navigasi antar section
+    const homeLink = document.getElementById('homeLink');
+    const buyLink = document.getElementById('buyLink');
+    const homeSection = document.getElementById('home-section');
+    const buySection = document.getElementById('buy-section');
+
+    homeLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      homeSection.classList.add('active');
+      buySection.classList.remove('active');
+      homeLink.classList.add('active');
+      buyLink.classList.remove('active');
+    });
+
+    buyLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      buySection.classList.add('active');
+      homeSection.classList.remove('active');
+      buyLink.classList.add('active');
+      homeLink.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
