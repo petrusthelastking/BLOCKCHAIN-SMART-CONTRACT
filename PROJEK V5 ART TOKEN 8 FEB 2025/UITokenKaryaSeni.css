@@ -1,15 +1,14 @@
-/* Variabel CSS untuk konsistensi warna */
+/* Variabel Tema */
 :root {
-  --primary-color: #1abc9c;
-  --secondary-color: #16a085;
-  --background-dark: #0a0a0f;
-  --overlay-color: rgba(0, 0, 0, 0.4);
-  --gradient-start: #1a2a6c;
-  --gradient-mid: #b21f1f;
-  --gradient-end: #fdbb2d;
+  --primary-color: #00e676;       /* Aksen hijau segar */
+  --background-dark: #121212;      /* Latar belakang gelap bersih */
+  --text-light: #e0e0e0;           /* Teks abu terang */
+  --card-bg: #1e1e1e;             /* Latar belakang kartu */
+  --border-radius: 16px;
+  --transition-speed: 0.3s;
 }
 
-/* Reset dasar */
+/* Reset Dasar */
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +17,7 @@
 
 body {
   background: var(--background-dark);
-  color: #fff;
+  color: var(--text-light);
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
 }
@@ -27,328 +26,2038 @@ body {
 .container {
   width: 90%;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
-/* Header & Navigasi Fixed dengan efek glassmorphism */
-header {
+/* Header & Navigasi */
+.header {
   width: 100%;
   padding: 20px 0;
-  background: rgba(10, 10, 15, 0.8);
+  background: rgba(18, 18, 18, 0.9);
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 1000;
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 20px;
 }
 
 .logo {
   font-size: 1.8rem;
   font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
   color: var(--primary-color);
+  margin-left: 50px;  
+  margin-right: 100px;
 }
 
-.nav-actions {
+.nav ul {
   display: flex;
-  align-items: center;
+  gap: 30px;
+  list-style: none;
 }
 
-/* Hide tombol Connect Wallet jika wallet sudah tersambung (menggunakan :has) */
-.nav-actions:has(#walletAddress:not(:empty)) #connectWalletBtn {
-  display: none;
+.nav ul li a {
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  transition: background var(--transition-speed);
+  margin: 0 5px;
+}
+
+.nav ul li a:hover,
+.nav ul li a.active {
+  background: var(--primary-color);
+  color: var(--background-dark);
 }
 
 .btn {
   background: var(--primary-color);
-  color: #fff;
+  color: var(--background-dark);
   border: none;
   padding: 10px 20px;
-  border-radius: 30px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: transform var(--transition-speed);
 }
 
 .btn:hover {
-  background: var(--secondary-color);
   transform: scale(1.05);
-  box-shadow: 0 0 15px var(--primary-color);
+}
+
+.coin-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  perspective: 1000px;
+}
+.coin-image {
+  animation: flip 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-origin: center;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+  width: 400px; /* contoh ukuran */
+  height: auto;
+  
+}
+.coin-image:hover {
+  transform: rotateY(180deg);
 }
 
 .wallet-address {
-  margin-left: 15px;
+  margin-right: 50px; /* Tambahkan jarak di sebelah kiri alamat wallet */
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
   font-size: 0.9rem;
 }
-
-/* Hero Section dengan animasi gradient dan overlay */
-.hero {
-  height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  text-align: center;
-  padding-top: 100px; /* offset header */
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #000;          /* Latar belakang hitam, sesuaikan */
+  color: #fff;               /* Teks putih */
+  font-size: 1rem;           /* Ukuran font, bisa disesuaikan */
+  padding: 10px 0;
   position: relative;
+  margin-bottom: 20px;       /* Jarak bawah jika diperlukan */
 }
-
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--overlay-color);
-  z-index: 1;
-}
-
-.hero-container {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-}
-
-.hero-title {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.hero-subtitle {
-  font-size: 1.4rem;
-  margin-bottom: 30px;
-}
-
-/* Info Section */
-.info-section {
-  padding: 60px 0;
-  background: #15151a;
-  margin-top: 100px; /* jarak dari header */
-}
-
-.info-section h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2.5rem;
-  letter-spacing: 1px;
-}
-
-.info-section p,
-.info-section ul {
-  max-width: 800px;
-  margin: 0 auto 15px auto;
-  font-size: 1.1rem;
-}
-
-.info-section ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
-
-.info-section ul li {
-  margin-bottom: 8px;
-}
-
-/* Tutorial Section */
-.tutorial-section {
-  padding: 60px 0;
-  background: #1a1a1f;
-  margin-top: 20px;
-}
-
-.tutorial-section h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2.2rem;
-}
-
-.tutorial-section ol {
-  max-width: 800px;
-  margin: 0 auto;
-  font-size: 1.2rem;
-  padding-left: 20px;
-}
-
-.tutorial-section li {
-  margin-bottom: 8px;
-}
-
-/* Card Style */
-.card {
-  background: #1f1f24;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-  border: 1px solid transparent;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  background: #27272c;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 15px var(--primary-color);
-}
-
-.card h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-}
-
-.card label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 1rem;
-}
-
-.card input[type="number"] {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #2a2a2e;
-  color: #fff;
-  margin-bottom: 15px;
-  font-size: 1rem;
-}
-
-.status-msg {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 0.9rem;
-}
-
-/* Layout untuk Section Beli Token */
 #buy-section {
-  padding-top: 120px; /* offset header */
+  padding-top: 80px; /* atau nilai lain sesuai tinggi header */
 }
 
-.cards-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 40px;
+.ticker__wrap {
+  display: inline-block;
+  padding-left: 100%;        /* Mulai dari sisi kanan */
+  animation: ticker 120s linear infinite; /* Durasi 15 detik, loop infinite */
 }
 
-/* Footer */
-footer {
-  background: var(--background-dark);
-  padding: 20px 0;
-  text-align: center;
-  font-size: 0.9rem;
-  margin-top: 60px;
+.ticker__item {
+  font-weight: 600;          /* Biar lebih tegas */
+  margin-right: 30px;        /* Jarak antar item */
 }
 
-/* Utility: Sembunyikan/munculkan konten antar section */
+/* Warna hijau untuk item naik */
+.up {
+  color: #00e676;            /* Hijau */
+}
+
+/* Warna merah untuk item turun */
+.down {
+  color: #ff3b3b;            /* Merah */
+}
+
+/* Keyframes animasi marquee */
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%); /* Bergerak hingga item hilang di kiri */
+  }
+}
+/* Content Sections */
 .content-section {
   display: none;
+  padding-top: 30px; /* agar konten tidak tertutup header */
+  min-height: 100vh;
 }
 
 .content-section.active {
   display: block;
 }
 
+.rain {
+  position: fixed;           /* Posisi tetap sebagai background */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;      /* Agar tidak mengganggu interaksi user */
+  overflow: hidden;
+  z-index: -1;               /* Tempatkan di belakang konten utama */
+}
 
-/* ======================================== */
-/*             Responsive Styles            */
-/* ======================================== */
+/* Setiap tetesan air */
+.drop {
+  position: absolute;
+  bottom: 100%;
+  width: 2px;
+  height: 20px;
+  background: var(--primary-color); /* Gunakan warna hijau dari variabel (misalnya #00e676) */
+  opacity: 0.6;
+  animation: fall 1.5s linear infinite;
+}
 
-/* Tampilan untuk perangkat dengan lebar maksimal 768px (tablet dan smartphone besar) */
-@media (max-width: 768px) {
-  .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
+/* Animasi jatuh */
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8;
   }
-
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-    width: 100%;
-  }
-
-  .nav-actions {
-    align-self: flex-end;
-    margin-top: 10px;
-  }
-
-  .hero {
-    height: auto;
-    padding: 80px 20px;
-    text-align: center;
-  }
-
-  .hero-title {
-    font-size: 2.2rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  .info-section h2,
-  .tutorial-section h2 {
-    font-size: 2rem;
-  }
-
-  .cards-section {
-    grid-template-columns: 1fr;
-  }
-
-  .container {
-    width: 95%;
+  100% {
+    transform: translateY(110vh); /* Jatuh melewati layar */
+    opacity: 0;
   }
 }
 
-/* Tampilan untuk perangkat dengan lebar maksimal 480px (smartphone kecil) */
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 1.8rem;
-  }
+/* Atur posisi dan delay masing-masing drop secara acak */
+.drop:nth-child(1)  { left: 10%; animation-delay: 0s; }
+.drop:nth-child(2)  { left: 20%; animation-delay: 0.3s; }
+.drop:nth-child(3)  { left: 30%; animation-delay: 0.6s; }
+.drop:nth-child(4)  { left: 40%; animation-delay: 0.9s; }
+.drop:nth-child(5)  { left: 50%; animation-delay: 1.2s; }
+.drop:nth-child(6)  { left: 60%; animation-delay: 1.5s; }
+.drop:nth-child(7)  { left: 70%; animation-delay: 1.8s; }
+.drop:nth-child(8)  { left: 80%; animation-delay: 2.1s; }
+.drop:nth-child(9)  { left: 90%; animation-delay: 2.4s; }
+.drop:nth-child(10) { left: 15%; animation-delay: 0.15s; }
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 160px 20px 80px;
+  background: linear-gradient(135deg, #121212, var(--primary-color), #121212);
+  background-size: 200% 200%;
+  animation: gradientBG 6s ease infinite;
+}
 
-  .hero-subtitle {
-    font-size: 0.9rem;
-  }
+.hero-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 50px; /* Atur padding horizontal jika diperlukan */
+}
 
-  .nav-container, nav ul {
+
+/* Hero Flex Container untuk dua kolom */
+.hero-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px; /* Naikkan nilai gap untuk menambah jarak antara teks dan gambar */
+  flex-wrap: nowrap; /* Agar tetap dalam satu baris */
+}
+
+
+.hero-text {
+  flex: 1 1 300px;
+  text-align: left;
+}
+
+.hero-image {
+  flex: 1 1 1000px;
+  text-align: right;
+  margin-left: 100px; /* Tambahkan jarak kiri sebesar 40px, Anda bisa menyesuaikan nilainya */
+}
+
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}
+
+
+#home-section .hero-text .hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 10px; /* Jarak bawah judul */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.2; /* Atur jarak antar-baris */
+}
+
+#home-section .hero-text .hero-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-light);
+  margin-top: 5px;    /* Menambah jarak atas subtitle */
+  margin-bottom: 10px; /* Opsional: menambah jarak bawah subtitle */
+}
+/* Animasi Gradient */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Info Section */
+.info-section {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
+  padding: 40px 20px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.info-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.info-section p {
+  font-size: 1.2rem;
+}
+
+/* Detailed Info Section (Grid Layout) */
+.detailed-info.modern-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin: 40px 0;
+  padding: 0 20px;
+}
+
+/* Modern Card Styles */
+.modern-card {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.modern-card:hover {
+  transform: translateY(-10px);
+}
+
+.modern-card h2 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.modern-card p,
+.modern-card ul {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.modern-card ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+/* Timeline Section (Roadmap & Implementasi) - Vertical Timeline, Centered, Animative */
+.timeline-section {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
+  padding: 40px 20px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.timeline-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.timeline {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--primary-color);
+}
+
+.timeline-item {
+  position: relative;
+  margin: 40px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timeline-content {
+  background: var(--card-bg);
+  padding: 15px 25px;
+  border-radius: var(--border-radius);
+  display: inline-block;
+  position: relative;
+  max-width: 80%;
+}
+
+.timeline-date {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.timeline-text {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
+  padding: 40px 20px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.testimonials-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.testimonials-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.testimonial-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+  max-width: 300px;
+  transition: transform var(--transition-speed) ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+}
+
+.testimonial-card p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.testimonial-card span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+/* ===== Price Stats Container ===== */
+.price-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;            /* Jarak antar kolom info */
+  margin-bottom: 20px;  /* Jarak bawah dari price stats ke konten berikutnya */
+}
+
+/* ===== Price High & Price Low Boxes ===== */
+.price-high,
+.price-low {
+  background: var(--card-bg);  /* Gunakan warna kartu */
+  padding: 10px 16px;          /* Spasi dalam yang cukup */
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  text-align: center;          /* Teks di tengah */
+}
+
+/* Label (judul) untuk masing-masing box */
+.price-high .label,
+.price-low .label {
+  display: block;
+  font-size: 0.9rem;           /* Ukuran label yang lebih kecil */
+  color: #ccc;                 /* Warna label agak pucat */
+  margin-bottom: 4px;          /* Jarak antara label dan nilainya */
+}
+
+/* Nilai harga (value) untuk masing-masing box */
+.price-high .value,
+.price-low .value {
+  font-size: 1.2rem;           /* Ukuran lebih besar untuk menonjolkan nilai */
+  font-weight: 600;
+  color: #fff;                 /* Teks putih untuk kontras */
+}
+/* FAQ Section */
+.faq-section {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
+  padding: 40px 20px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.faq-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.faq-item {
+  margin-bottom: 20px;
+}
+
+.faq-item h3 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+.faq-item p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Team Section */
+.team-section {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
+  padding: 40px 20px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.team-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.team-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);
+  max-width: 250px;
+  text-align: center;
+  transition: transform var(--transition-speed) ease;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+}
+
+.team-card img {
+  width: 100%;
+  border-radius: 0; /* Menghilangkan efek oval, sehingga foto tampil normal */
+  margin-bottom: 10px;
+}
+
+#transactionChart {
+  border: 2px solid red;
+  width: 100% !important;
+  height: 500px !important;
+}
+
+.team-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+  color: var(--primary-color);
+}
+
+.team-card p {
+  font-size: 0.9rem;
+}
+
+/* Buy Interface */
+.buy-interface {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 40px 0;
+  justify-content: center;
+}
+
+.card {
+  background: #1f1f24;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+  width: 300px;
+  transition: transform var(--transition-speed) ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.card label {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.card input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: var(--border-radius);
+  background: #2a2a2e;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+/* Tutorial Section */
+/* =================== Enhanced Tutorial Page Styles =================== */
+#tutorial-section {
+  background: linear-gradient(135deg, #1f1f1f, #121212);
+  padding: 80px 20px;
+  margin: 40px auto;
+  border-radius: var(--border-radius);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
+  animation: fadeIn 1.5s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hero Section untuk Tutorial */
+#tutorial-section .hero.hero-tutorial {
+  background: transparent;
+  padding: 60px 20px;
+  text-align: center;
+  position: relative;
+}
+
+#tutorial-section .hero.hero-tutorial::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0,230,118,0.1), rgba(0,230,118,0.3), rgba(0,230,118,0.1));
+  z-index: -1;
+  filter: blur(30px);
+  opacity: 0.7;
+}
+
+#tutorial-section .hero.hero-tutorial .hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+  letter-spacing: 1px;
+  animation: slideInDown 1s ease-out forwards;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#tutorial-section .hero.hero-tutorial .hero-subtitle {
+  font-size: 1.6rem;
+  color: var(--text-light);
+  margin-bottom: 40px;
+  animation: slideInUp 1s ease-out forwards;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Layout konten tutorial */
+.tutorial-content {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Divider dekoratif */
+.tutorial-content .section-divider {
+  width: 80%;
+  height: 2px;
+  background: var(--primary-color);
+  margin: 20px 0;
+  opacity: 0.5;
+  border-radius: 4px;
+}
+
+/* Container video tutorial */
+.tutorial-videos {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Kartu video (Mobile & PC) dengan efek 3D dan overlay */
+.tutorial-videos .tutorial-mobile,
+.tutorial-videos .tutorial-pc {
+  background: linear-gradient(145deg, #1e1e1e, #232323);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 550px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.tutorial-videos .tutorial-mobile::before,
+.tutorial-videos .tutorial-pc::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0,230,118,0.2), transparent 60%);
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tutorial-videos .tutorial-mobile:hover,
+.tutorial-videos .tutorial-pc:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
+}
+
+.tutorial-videos .tutorial-mobile:hover::before,
+.tutorial-videos .tutorial-pc:hover::before {
+  opacity: 1;
+}
+
+/* Styling video */
+.tutorial-videos video {
+  width: 100%;
+  border-radius: var(--border-radius);
+  display: block;
+  transition: filter 0.3s;
+}
+
+.tutorial-videos video:hover {
+  filter: brightness(1.1);
+}
+
+/* Overlay tambahan untuk efek dramatis */
+.tutorial-videos .video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: var(--border-radius);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tutorial-videos .tutorial-mobile:hover .video-overlay,
+.tutorial-videos .tutorial-pc:hover .video-overlay {
+  opacity: 1;
+}
+
+/* Responsivitas: Stack video secara vertikal pada layar kecil */
+@media (max-width: 768px) {
+  .tutorial-videos {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Layout Grid ala Exchange: Chart (kiri) & Panel (kanan) */
+.exchange-layout {
+  display: grid;
+  grid-template-columns: 10fr 1fr 3fr; /* Chart lebih lebar, misalnya 4fr */
+  gap: 20px;
+  margin-top: 80px;
+  padding: 0 40px;
+  margin-bottom: 40px;
+  margin-top: 10px; /* Atur jarak dari marquee ke konten */
+  align-self: start; /* Agar Order Book, Chart, Beli Token tidak memanjang ke bawah */
+}
+
+/* Container utama: ikon ART, label, caret, dan box harga */
+.pair-card {
+  display: flex;              /* Biar konten berderet */
+  align-items: center;               /* Vertikal rata tengah */
+  background: #1e1e1e;               /* Latar belakang card */
+  border: 1px solid #333;            /* Stroke tipis di tepi */
+  border-radius: 8px;                /* Sudut membulat */
+  padding: 8px 50px;                 /* Spasi dalam card */
+  cursor: pointer;                   /* Tunjukkan bisa diklik (opsional) */
+  gap: 25px;                          /* Jarak horizontal antara ikon & teks & caret */
+}
+
+/* Ikon token (BTC/ART) */
+.pair-icon {
+  width: 50px;                       /* Sesuaikan ukuran ikon */
+  height: 50px;
+}
+
+/* Container yang memuat box Tertinggi & Terendah */
+.price-info {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Jarak horizontal antar box */
+  /* Hapus margin-left: auto; jika tidak ingin mendorong ke kanan */
+}
+
+
+/* Bagian Chart di Kiri */
+.chart-area {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+  height: auto; /* Naikkan tinggi minimum agar card lebih besar */
+  /* Hapus atau nonaktifkan properti aspect-ratio jika ada */
+  
+  
+}
+
+
+.chart-area canvas {
+  width: 100% !important;
+  height: 400px !important;  /* Sesuaikan tinggi canvas sesuai kebutuhan */
+  /* Jika ada border untuk testing, Anda bisa hapus border: 2px solid red; */
+}
+
+/* Order Book */
+.order-book h2 {
+  margin-bottom: 10px;
+}
+.order-book {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+  max-width: 300px;
+  margin: 0 auto;
+  align-self: start; /* Hanya setinggi konten, tidak di-stretch ke bawah */
+  height: auto;
+}
+
+.card {
+  background: #1e1e1e;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Bungkus tabel dengan border-radius */
+.table-container {
+  overflow-x: auto;            /* Tambahkan scroll horizontal */
+  -webkit-overflow-scrolling: touch; /* Agar scroll di perangkat mobile lebih halus */
+  border-radius: var(--border-radius);
+}
+
+/* Styling tabel */
+.orderbook-table {
+  min-width: 400px; /* atau nilai lain sesuai kebutuhan */
+  width: 100%;
+  border-collapse: collapse;
+}
+/* Untuk browser berbasis WebKit (Chrome, Safari, Edge Chromium) */
+.table-container::-webkit-scrollbar {
+  height: 8px; /* Tinggi scrollbar */
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: transparent; /* Latar belakang track */
+  border-radius: var(--border-radius);
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color); /* Warna scrollbar sesuai tema */
+  border-radius: var(--border-radius);
+}
+
+/* Untuk Firefox */
+.table-container {
+  scrollbar-width: thin; /* Ukuran scrollbar tipis */
+  scrollbar-color: var(--primary-color) transparent; /* Thumb dan track */
+}
+
+.orderbook-table th,
+.orderbook-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+.orderbook-table th {
+  background: var(--primary-color);
+  color: var(--background-dark);
+  font-weight: 600;
+}
+
+/* Hilangkan border bawah pada baris terakhir */
+.orderbook-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Forms Panel (Beli Token & Cek Saldo) */
+
+.forms-panel,
+.card-with-tabs {
+  width: 100%;
+  max-width: none; /* Supaya tidak dibatasi */
+}
+
+.buy-sell-container {
+  display: flex;
+  flex-direction: column; /* Biar form Beli Token dan Cek Produk disusun vertikal */
+  gap: 20px;
+}
+.order-book .orderbook-container {
+  max-height: 480px;                      /* Batasi tinggi kontainer Order Book */
+  overflow: auto;                         /* Aktifkan scroll horizontal dan vertikal */
+  -webkit-overflow-scrolling: touch;      /* Scroll halus di perangkat mobile */
+  border-radius: var(--border-radius);     /* Pastikan kontainer memiliki border-radius agar scrollbar juga mengikuti */
+}
+/* Custom scrollbar untuk browser berbasis WebKit (Chrome, Safari, Edge) */
+.order-book .orderbook-container::-webkit-scrollbar {
+  width: 8px;    /* Lebar scrollbar vertikal */
+  height: 8px;   /* Tinggi scrollbar horizontal */
+}
+
+.order-book .orderbook-container::-webkit-scrollbar-track {
+  background: transparent;  
+  border-radius: var(--border-radius);
+}
+
+.order-book .orderbook-container::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);  /* Gunakan warna utama sebagai warna thumb */
+  border-radius: var(--border-radius);
+}
+
+/* Custom scrollbar untuk Firefox */
+.order-book .orderbook-container {
+  scrollbar-width: thin;                    /* Scrollbar tipis */
+  scrollbar-color: var(--primary-color) transparent;  /* Thumb dengan warna primary, track transparan */
+}
+
+.trade-forms,
+.balance-check {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+}
+
+/* Form Beli Token */
+.trade-forms {
+  background: #2a2a2e;
+  border-radius: var(--border-radius);
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+}
+
+.trade-forms h2 {
+  margin-bottom: 10px;
+}
+.trade-forms label {
+  display: block;
+  margin-bottom: 6px;
+}
+.trade-forms input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: var(--border-radius);
+  background: #1e1e1e;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.trade-forms .btn {
+  margin-top: 10px;
+}
+
+/* Cek Saldo */
+.balance-check {
+  background: #2a2a2e;
+  border-radius: var(--border-radius);
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+}
+/* Container untuk dua tab (Beli & Cek Saldo) */
+.tab-container {
+  display: inline-flex;        /* Supaya tombol tab berdampingan */
+  margin-bottom: 20px;         /* Jarak ke konten form */
+  border-radius: var(--border-radius);
+  overflow: hidden;            /* Agar sudut membulat */
+  background: none;            /* Tidak perlu background lain */
+}
+
+/* Tombol tab */
+
+.tab-btn {
+  border: none;
+  /* Kurangi padding agar tab tidak terlalu “tebal” */
+  padding: 10px 28px;        
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;        /* Kecilkan sedikit ukuran font */
+  color: #fff;
+  background: transparent;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Tombol Beli (kiri) & Cek Saldo (kanan) – rounding sudut kiri & kanan */
+.tab-btn:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.tab-btn:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Tombol tab yang aktif (misal Beli) akan hijau */
+.tab-btn.active {
+  background: var(--primary-color); /* Hijau */
+  color: #000; /* Teks hitam, kontras dengan hijau */
+}
+
+/* Konten form di bawah tab, default disembunyikan */
+.tab-content {
+  display: none; /* disembunyikan kecuali tab aktif */
+  margin-top: 10px;
+}
+
+/* Styling form di dalam tab-content */
+.tab-content h2 {
+  margin-bottom: 10px;
+}
+
+.tab-content label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.tab-content input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: var(--border-radius);
+  background: #1e1e1e;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* Card utama yang menampung tab dan form */
+.card-with-tabs {
+  background: #2a2a2e; 
+  border-radius: var(--border-radius);
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+
+  /* Buat agar selebar mungkin di kolomnya */
+  width: 100%;
+  max-width: none; 
+}
+/* --- Tombol About Token --- */
+.btn-about-token {
+  background: #198754;     /* Warna hijau bootstrap-like */
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.btn-about-token:hover {
+  background: #157347;
+  transform: scale(1.03);
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; 
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border-radius: 5px;
+}
+.close {
+  color: #fff;        /* Pastikan warna close button kontras */
+  position: absolute;
+  top: 20px;          /* Geser sedikit agar tidak menempel di sudut */
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.iframe-fullscreen {
+  width: 100%;
+  height: 100vh;
+  border: none;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#walletAddress {
+  margin-top: 10px;    /* Memberi jarak di atas status wallet */
+}
+
+#checkBalanceBtn {
+  margin-bottom: 5px; /* Jarak di bawah tombol */
+}
+
+#balanceDisplay {
+  margin-top: 5px;    /* Jarak di atas teks saldo */
+}
+
+/* Container pill untuk tab Beli & Cek Saldo */
+.tab-pill {
+  display: inline-flex;
+  border-radius: 0px;  /* Bentuk pill */
+  overflow: hidden;       /* Supaya border radius tampak */
+  background: #1e1e1e;    /* Latar belakang tab secara umum */
+  margin-bottom: 20px;    /* Jarak ke form */
+}
+
+/* Konten form yang aktif muncul */
+.tab-content.active {
+  display: block;
+}
+
+@media (max-width: 992px) {
+  .exchange-layout {
+    grid-template-columns: 1fr; /* Chart & right-panel menumpuk vertikal */
+  }
+  .right-panel {
+    flex-direction: column;     /* Order book & forms menumpuk */
+  }
+}
+
+/* Responsif: di layar kecil, tumpuk semua ke bawah */
+@media (max-width: 768px) {
+  .exchange-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  .chart-area {
+    height: auto;
+  }
+}
+/* Panel kiri: Chart */
+.left-panel .chart-container {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+}
+.left-panel .chart-container h2 {
+  margin-bottom: 10px;
+}
+.left-panel .chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Panel kanan: Order Book dan Form Beli Token & Cek Saldo */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* atau 'start' agar item tidak membesar ke bawah */
+}
+
+
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  padding: 0 20px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  animation: fadeInDown 1s ease forwards;
+  opacity: 0;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+}
+
+.hero-cta {
+  background: #00e676;
+  color: #121212;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+}
+
+.hero-cta:hover {
+  background: #00ff88;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Judul Section */
+.news-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #00e676; /* Neon hijau */
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease;
+}
+
+/* Grid Layout untuk daftar berita */
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Card Berita */
+.news-item {
+  background: #1e1e1e;
+  border: 1px solid rgba(0, 230, 118, 0.5); /* Stroke neon hijau */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.news-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 230, 118, 0.7);
+}
+
+/* Judul Berita */
+.news-item h3 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 10px;
+  animation: fadeInUp 0.8s ease;
+}
+
+/* Deskripsi Berita */
+.news-item p {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+/* Link Baca Selengkapnya */
+.news-item a {
+  color: #00e676;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.news-item a:hover {
+  color: #00ff88;
+}
+
+.mini-calculator input {
+  width: 100px;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 10px;
+  background: #2a2a2e;
+  color: var(--text-light);
+  text-align: right;
+  font-size: 1rem;
+}
+
+.mini-calculator input::placeholder {
+  color: #ccc;
+}
+
+.mini-calculator .arrow {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+
+/* ===== Nonaktifkan scroll pada body/html ===== */
+/* Normal untuk body agar section lain (Home, dsb.) bisa di-scroll */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #121212;
+  font-family: sans-serif;
+}
+
+/* SECTION AI */
+
+.ai-layout {
+  display: flex;
+  flex-direction: row;   /* Sidebar kiri, chat kanan */
+  gap: 20px;
+  padding: 20px;
+  height: auto;
+  overflow: visible;
+  padding-top: 80px; /* Sedikit lebih besar dari 70px agar tidak tertutup */
+  min-height: calc(100vh - 70px);
+}
+
+/* Tombol riwayat (khusus mobile), maka disembunyikan di desktop */
+.history-toggle-btn {
+  display: none;
+}
+
+/* Sidebar Riwayat */
+.chat-history-sidebar {
+  width: 250px;
+  max-width: 250px;
+  background: #1e1e1e;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Container Chat */
+.chatgpt-container {
+  flex: 1;
+  background: #2a2a2e;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.quick-btn {
+  background: #4a4a4e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Area Pesan */
+.chat-message {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  animation: fadeInUp 0.4s ease forwards;
+  opacity: 0;
+}
+
+/* Chat dari user di kanan, AI di kiri */
+.chat-message.user {
+  justify-content: flex-end;
+}
+.chat-message.bot {
+  justify-content: flex-start;
+}
+
+.bubble {
+  background: #3e3f4b;       /* Warna latar (gelap) untuk AI */
+  color: #f5f5f5;            /* Teks terang */
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 70%;            /* Batas lebar agar bubble tidak melebar penuh */
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+}
+
+/* Bubble user, misal warna kebiruan */
+.chat-message.user .bubble {
+  background: #1e90ff;
+  color: #ffffff;
+}
+
+
+/* Input Chat */
+.chatgpt-input {
+  position: relative;   /* Biasa saja di desktop */
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: #40414F;
+  border-top: 1px solid #565869;
+}
+
+.chat-input {
+  flex: 1;
+  background: #343541;
+  color: #e0e0e0;
+  border: 1px solid #565869;
+  border-radius: 20px;
+  padding: 8px 14px;
+  outline: none;
+}
+.icon-button {
+  background: #4a4a4e;
+  color: #ccc;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.send-btn {
+  background: #4a4a4e;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.send-btn:hover {
+  background: #5a5a5e;
+}
+
+
+.chatgpt-welcome {
+  text-align: center;
+  margin-top: 150px; /* Nilai contoh, silakan sesuaikan (60px, 100px, dsb.) */
+  margin-bottom: 20px;
+}
+
+.quick-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Efek animasi */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+
+/* Footer */
+.footer {
+  background: #0d0d0d;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 40px;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+/* ================= Responsive Styles untuk Tablet dan Mobile ================= */
+
+
+/* ================= Desktop Default ================= */
+/* (Kode desktop Anda tetap seperti sebelumnya) */
+@media (max-width: 768px) {
+  /* Atur ulang header hero agar lebih compact dan center */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 40px 1000px;
+    background: linear-gradient(135deg, #121212, var(--primary-color), #121212);
+    background-size: 200% 200%;
+    animation: gradientBG 6s ease infinite;
+    text-align: center;
+  }
+  
+  
+  /* Pastikan container hero-flex juga tumpuk dan center */
+  .hero-flex {
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+  
+  /* Kolom teks hero */
+  .hero-text {
+    max-width: 600px;
+    padding: 0 70px !important; 
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .hero-title {
+    font-size: 1.4rem; 
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.8rem;
+    margin: 5px 0 15px;
+    color: #e0e0e0;
+    text-align: center;
+  }
+  
+  /* Tombol About Token */
+  .btn-about-token {
+    background: #198754;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    margin: 0 auto; /* Tombol center */
+  }
+  
+  .btn-about-token:hover {
+    background: #157347;
+    transform: scale(1.03);
+  }
+  
+  /* Kolom gambar hero */
+  .hero-image {
+    margin-top: 20px;
+    text-align: center;
+    /* Jika perlu, tambahkan margin auto untuk memastikan gambar center */
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-menu li a {
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  transition: background 0.3s ease;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.active {
+  background: var(--primary-color);
+  color: var(--background-dark);
+}
+
+.coin-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  background: var(--primary-color);
+  color: var(--background-dark);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* Sembunyikan tombol hamburger di desktop */
+.hamburger-btn {
+  display: none;
+}
+
+/* ================= Responsive Mobile ================= */
+@media (max-width: 768px) {
+  /* Buat container jadi acuan untuk posisi absolute */
+  .hero {
+    display: flex;
+    flex-direction: column;  /* Tumpuk teks & gambar di mobile */
+    align-items: center;     /* Pastikan konten di tengah secara horizontal */
+    justify-content: center; /* (Opsional) untuk memusatkan vertikal */
+    padding: 100px 40px 40px;
+    background: linear-gradient(135deg, #121212, var(--primary-color), #121212);
+    background-size: 200% 200%;
+    animation: gradientBG 6s ease infinite;
+    text-align: center; /* Pastikan hero juga center secara default */
+  }
+
+  /* Kolom teks hero */
+  .hero-text {
+    margin-left: 0;   /* Hilangkan margin kiri besar */
+    text-align: center; /* Teks di kolom hero-text center */
+    margin-bottom: 300px; /* Tambah jarak bawah agar tak menempel ke bawah */
+    position: relative;
+    top: 100px; /* Geser ke bawah tanpa mempengaruhi background */
+    
+  }
+  
+  .hero-title {
+    font-size: 2rem;  /* Sesuaikan untuk mobile */
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    margin: 5px 0 15px 0;
+    color: #e0e0e0;
+  }
+  
+  /* Tombol About Token */
+  .btn-about-token {
+    background: #198754;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    margin: 0 auto; /* Pastikan tombol juga center */
+  }
+  
+  .btn-about-token:hover {
+    background: #157347;
+    transform: scale(1.03);
+  }
+  
+  /* Kolom gambar (jika ada) */
+  .hero-image {
+    margin-top: 20px; /* Jarak atas */
+    text-align: center;
+  }
+  .nav-container {
+    position: relative;
+    padding: 0 10px;
+    min-height: 10px; /* Pastikan cukup tinggi untuk baris pertama */
+  }
+  
+  /* Logo tetap di kiri atas */
+  .logo {
+    position: absolute;
+    top: 0px;
+    left: 60px;
+    font-size: 1.5rem;
+    margin: 0;
+    z-index: 2;
+  }
+  
+  
+  /* Wallet di pojok kanan atas */
+  .coin-container {
+    position: absolute;
+    top: -8px;
+    right: -40px;  /* Jarak 5px dari sisi kanan */
+    margin: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Tampilkan tombol hamburger */
+   .hamburger-btn {
+    display: block !important;  /* Pastikan tampil */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+    position: relative; /* Bisa relative atau absolute, sesuai kebutuhan */
+  }
+  
+  .hamburger-btn .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 2.5px 0;
+    background: #fff;
+    transition: 0.3s;
+  }
+  
+  /* Sembunyikan menu navigasi secara default */
+  .nav {
+    display: none;
+  }
+  
+  /* Saat menu aktif (diklik hamburger), tampilkan sebagai dropdown */
+  .nav.active {
+    display: block;
+    position: absolute;
+    top: 60px;  /* Sesuaikan agar tidak menabrak header */
+    left: 0;
+    right: 0;
+    background: #1e1e1e;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+    z-index: 1000;
+  }
+  
+  /* Atur menu navigasi di dropdown */
+  .nav .nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .nav .nav-menu li a {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Section CryptoAI: memenuhi layar penuh, dengan padding agar konten tidak menempel ke tepi */
+  #ai-section {
+    width: 100%;
+    min-height: 100vh;
+    background: #343541;
+    overflow: hidden; /* Nonaktifkan scroll body, pakai scroll internal di area chat */
+    position: relative;
+  }
+  
+  /* Layout Utama: jika mau side-drawer, kita tumpuk semua 
+     lalu .chat-history-sidebar kita posisikan absolute */
+  .ai-layout {
+    position: relative;
+    width: 100%;
+    height: auto; /* penuhi layar */
+    overflow: visible; 
+  }
+  
+  /* Tombol toggle history (opsional) */
+  .history-toggle-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1200;
+    background: #00e676;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  /* Sidebar Riwayat Chat: Slide In/Out */
+  .chat-history-sidebar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 70%; /* atau 80%, sesuai selera */
+    max-width: 300px;
+    height: 100vh;
+    background: #202123;
+    transform: translateX(-100%); /* Tersembunyi ke kiri */
+    transition: transform 0.3s ease;
+    z-index: 1100;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  /* Saat sidebar terbuka, mis. tambahkan class .open */
+  .chat-history-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .history-group {
+    margin-bottom: 20px;
+  }
+  .history-date {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #8e8ea0;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+  .history-list {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .history-item {
+    background: #2a2b32;
+    margin-bottom: 6px;
+    padding: 8px;
+    border-radius: 6px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  /* Container Chat: menempati seluruh layar saat sidebar tertutup */
+  .chatgpt-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #343541;
+    padding: 0 10px; /* jarak horizontal agar tidak mepet */
+    box-sizing: border-box;
+  }
+  
+  /* Bagian Welcome + tombol aksi cepat */
+  .chatgpt-welcome {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 30px 0;
+  }
+  .welcome-text {
+    color: #e8e8e8;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  .quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .quick-btn {
+    background: #4a4a4e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  /* Area Pesan Chat, bisa discroll jika panjang */
+  .chatgpt-messages {
+    flex: 1;
+    overflow-y: auto;
+    background: #343541;
+    padding: 10px 0; /* jarak vertical */
+  }
+  
+  /* Bar input di bawah, fixed */
+  .chatgpt-input {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #40414F;
+    border-top: 1px solid #565869;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 1200;
+  }
+  .chat-input {
+    flex: 1;
+    background: #343541;
+    color: #e0e0e0;
+    border: 1px solid #565869;
+    border-radius: 20px;
+    padding: 8px 14px;
+    outline: none;
+  }
+  
+  .icon-button {
+    background: #4a4a4e;
+    color: #ccc;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .history-toggle-btn {
+    position: absolute;
+    top: 50px; /* 70px (header) + 10px jarak */
+    left: 0px;
+    z-index: 1500; /* Nilai cukup tinggi agar terlihat, tapi tidak mengganggu sidebar */
+    background: #00e676;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: block;
+  }
+
+  /* Sidebar Riwayat Chat */
+  .chat-history-sidebar {
+    position: absolute;
+    top: 90px; /* Mulai tepat di bawah header */
+    left: 0;
+    width: 80%;              /* Atur lebar sesuai kebutuhan */
+    max-width: 300px;
+    height: calc(100vh - 70px); /* Penuhi sisa tinggi layar setelah header */
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-y: auto;
+    transform: translateX(-100%); /* Tersembunyi secara default */
+    transition: transform 0.3s ease;
+    z-index: 1400; /* Pastikan di bawah tombol toggle */
+    border-radius: 20px;
+  }
+  
+  /* Saat sidebar terbuka, tambahkan class .open untuk memunculkannya */
+  .chat-history-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  /* Pastikan header memiliki z-index yang lebih tinggi agar tidak tertutup sidebar */
+  .header {
+    z-index: 2000;
+  }
+}
