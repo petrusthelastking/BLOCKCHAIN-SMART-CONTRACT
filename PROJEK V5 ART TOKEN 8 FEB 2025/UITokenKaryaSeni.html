@@ -1,134 +1,828 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ArtToken Marketplace</title>
-  <!-- Google Fonts: menggunakan font Inter untuk tampilan modern -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Link ke file CSS eksternal -->
-  <link rel="stylesheet" href="UITokenKaryaSeni.css">
+
+  <!-- BAGIAN 1: Pemanggilan Library Chart.js dan Pendukung -->
+  <!-- Library Chart.js dan plugin pendukung -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@0.1.0-beta.0/dist/chartjs-chart-financial.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial/dist/chartjs-chart-financial.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.1.0"></script>
+
+  <!-- BAGIAN 2: Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- BAGIAN 3: File CSS Eksternal -->
+  <link rel="stylesheet" href="UITokenKaryaSeni.css" />
+
+  <!-- BAGIAN 4: CSS AOS (Animate On Scroll) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" />
+
+  <!-- BAGIAN 5: Title Halaman -->
 </head>
 <body>
-  <!-- Header: Navigasi Fixed dengan efek glassmorphism -->
-  <header class="header">
-    <div class="container nav-container">
+  <!-- BAGIAN 6: Header -->
+  <header class="header" data-aos="fade-down">
+    <div class="nav-container">
       <div class="logo">ArtToken</div>
+      
+      <!-- Tombol Hamburger (hanya muncul di mobile) -->
+      <button class="hamburger-btn">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      
+      <!-- Menu Navigasi -->
       <nav class="nav">
-        <ul>
+        <ul class="nav-menu">
           <li><a href="#" id="homeLink" class="active">Home</a></li>
           <li><a href="#" id="buyLink">Beli Token</a></li>
+          <li><a href="#" id="tutorialLink">Tutorial</a></li>
+          <li><a href="#" id="aiLink">CryptoAI</a></li>
         </ul>
       </nav>
-      <div class="nav-actions">
+      
+      <div class="coin-container">
         <button id="connectWalletBtn" class="btn">Connect Wallet</button>
         <span id="walletAddress" class="wallet-address"></span>
       </div>
     </div>
   </header>
-
-  <!-- Section Home -->
+  
+  
+  <!-- BAGIAN 7: Section Home -->
   <section id="home-section" class="content-section active">
-    <!-- Hero Section dengan background animasi gradient dan overlay gelap -->
-    <section class="hero">
-      <div class="container hero-container">
-        <h1 class="hero-title">ArtToken Marketplace</h1>
-        <p class="hero-subtitle">Trade, beli, dan kelola token Anda dengan mudah.</p>
+    
+    <!-- BAGIAN 7.1: Efek Rain (Air Jatuh) -->
+    <div class="rain">
+      <!-- Deretan div.drop untuk efek hujan/air jatuh -->
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <!-- ... (puluhan div.drop berikutnya) ... -->
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <!-- Tambahkan lebih banyak drop jika diperlukan -->
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+      <div class="drop"></div>
+    </div>
+
+    <!-- BAGIAN 7.2: Hero Section -->
+    <section class="hero" data-aos="fade-up">
+      <div class="hero-container hero-flex">
+        <!-- Kolom Teks -->
+        <div class="hero-text">
+          <h1 class="hero-title">ArtToken Marketplace</h1>
+          <p class="hero-subtitle">Empowering digital art with futuristic blockchain technology.</p>
+          <button id="aboutTokenBtn" class="btn-about-token">About Token</button>
+        </div>
+        <div id="pdfModal" class="modal">
+          <span id="closeModal" class="close">&times;</span>
+          <iframe id="pdfIframe" class="iframe-fullscreen"></iframe>
+        </div>
+        <!-- Kolom Gambar Token -->
+        <div class="hero-image">
+          <img src="Token.png" alt="Coin Logo" class="coin-image" />
+        </div>
       </div>
     </section>
-    <!-- Info Section -->
-    <section class="info-section">
-      <div class="container">
-        <h2>Apa Itu ArtToken?</h2>
-        <p>ArtToken adalah token digital yang dirancang khusus untuk mendukung ekosistem seni digital. Token ini berguna untuk:</p>
+
+    <!-- BAGIAN 7.3: Info Section -->
+    <section class="info-section" data-aos="fade-up">
+      <h2>Apa itu ArtToken?</h2>
+      <p>ArtToken adalah token digital yang mendukung ekosistem seni digital dengan keamanan dan transparansi tinggi.</p>
+      <p><strong>Jaringan:</strong> Ethereum</p>
+    </section>
+
+    <!-- BAGIAN 7.4: Detailed Info Section -->
+    <section class="detailed-info modern-grid" data-aos="fade-up">
+      <div class="modern-card">
+        <h2>Tentang Token</h2>
         <ul>
-          <li>Mendukung transaksi di marketplace karya seni digital.</li>
-          <li>Memfasilitasi kepemilikan dan autentikasi karya seni.</li>
-          <li>Mendorong partisipasi dalam komunitas seni yang terdesentralisasi.</li>
+          <li>Latar belakang dan alasan dibuatnya token.</li>
+          <li>Keunggulan: keamanan, transparansi, inklusivitas, dll.</li>
+          <li>Model supply tetap (18 juta unit) untuk stabilitas harga.</li>
         </ul>
-        <p><strong>Jaringan:</strong> ArtToken dibangun di atas jaringan <em>Ethereum</em>, yang terkenal dengan desentralisasi dan keamanannya.</p>
-        <p><strong>Keamanan &amp; Transparansi:</strong> Dengan menggunakan smart contract yang telah diaudit, setiap transaksi aman dan tercatat secara publik di blockchain, sehingga menjamin transparansi penuh.</p>
+      </div>
+      <div class="modern-card">
+        <h2>Fitur &amp; Fungsionalitas</h2>
+        <ul>
+          <li>Penerbitan token supply tetap.</li>
+          <li>Verifikasi &amp; kurasi karya seni untuk NFT.</li>
+          <li>Marketplace terintegrasi.</li>
+          <li>Dashboard analitik transaksi.</li>
+          <li>Audit smart contract yang terjamin.</li>
+        </ul>
+      </div>
+      <div class="modern-card">
+        <h2>Teknologi</h2>
+        <ul>
+          <li>Blockchain: Ethereum, Binance Smart Chain, dll.</li>
+          <li>Smart contract dengan Solidity.</li>
+          <li>Framework frontend &amp; backend modern.</li>
+        </ul>
       </div>
     </section>
-    <!-- Tutorial Section -->
-    <section class="tutorial-section">
-      <div class="container">
-        <h2>Tutorial Penggunaan</h2>
-        <ol>
-          <li><strong>Connect Wallet:</strong> Klik tombol <em>Connect Wallet</em> untuk menghubungkan dompet digital (misalnya MetaMask) Anda.</li>
-          <li><strong>Beli Token:</strong> Pindah ke menu <em>Beli Token</em> dan masukkan jumlah token yang ingin Anda beli.</li>
-          <li><strong>Konfirmasi Transaksi:</strong> Ikuti petunjuk yang muncul pada dompet Anda untuk menyelesaikan transaksi.</li>
-          <li><strong>Cek Saldo:</strong> Setelah transaksi, kembali ke menu <em>Beli Token</em> untuk memeriksa saldo token Anda.</li>
-        </ol>
+
+    <!-- BAGIAN 7.5: Timeline Section -->
+    <section class="timeline-section" data-aos="fade-up">
+      <h2>Roadmap &amp; Implementasi</h2>
+      <div class="timeline">
+        <div class="timeline-item" style="animation-delay: 0s">
+          <div class="timeline-content">
+            <span class="timeline-date">Q1 2024</span>
+            <p class="timeline-text">Perencanaan dan desain awal.</p>
+          </div>
+        </div>
+        <div class="timeline-item" style="animation-delay: 0.2s">
+          <div class="timeline-content">
+            <span class="timeline-date">Q2 2024</span>
+            <p class="timeline-text">Pengembangan smart contract dan integrasi sistem.</p>
+          </div>
+        </div>
+        <div class="timeline-item" style="animation-delay: 0.4s">
+          <div class="timeline-content">
+            <span class="timeline-date">Q3 2024</span>
+            <p class="timeline-text">Uji coba dan audit keamanan.</p>
+          </div>
+        </div>
+        <div class="timeline-item" style="animation-delay: 0.6s">
+          <div class="timeline-content">
+            <span class="timeline-date">Q4 2024</span>
+            <p class="timeline-text">Peluncuran dan pengembangan fitur lanjutan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BAGIAN 7.6: Testimonials Section -->
+    <section class="testimonials-section" data-aos="fade-up">
+      <h2>Testimonials</h2>
+      <div class="testimonials-container">
+        <div class="testimonial-card">
+          <p>"ArtToken telah mengubah cara saya mengakses dunia seni digital. Transaksinya cepat dan transparan!"</p>
+          <span>- Andi</span>
+        </div>
+        <div class="testimonial-card">
+          <p>"Dengan ArtToken, saya merasa lebih percaya diri dalam berinvestasi pada karya seni digital."</p>
+          <span>- Siti</span>
+        </div>
+        <div class="testimonial-card">
+          <p>"Platform yang inovatif dengan antarmuka modern dan mudah digunakan."</p>
+          <span>- Budi</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BAGIAN 7.7: FAQ Section -->
+    <section class="faq-section" data-aos="fade-up">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <h3>Bagaimana cara membeli ArtToken?</h3>
+          <p>Anda dapat menghubungkan wallet Anda dan memasukkan jumlah token yang diinginkan pada bagian Beli Token.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Apa itu NFT?</h3>
+          <p>NFT adalah token non-fungible yang mewakili kepemilikan karya seni digital unik.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Bagaimana keamanan transaksi dijamin?</h3>
+          <p>Semua transaksi dilakukan melalui smart contract di blockchain, memastikan keamanan dan transparansi.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BAGIAN 7.8: Team Section -->
+    <section class="team-section" data-aos="fade-up">
+      <h2>Meet the Team</h2>
+      <div class="team-container">
+        <div class="team-card">
+          <img src="Petrus.jpg" alt="Team Member 1">
+          <h3>Nama 1</h3>
+          <p>Founder &amp; CEO</p>
+        </div>
+        <div class="team-card">
+          <img src="Petrus.jpg" alt="Team Member 2">
+          <h3>Nama 2</h3>
+          <p>CTO</p>
+        </div>
+        <div class="team-card">
+          <img src="Petrus.jpg" alt="Team Member 3">
+          <h3>Nama 3</h3>
+          <p>COO</p>
+        </div>
       </div>
     </section>
   </section>
-
-  <!-- Section Beli Token -->
+  
+  <!-- BAGIAN 8: Section Beli Token -->
   <section id="buy-section" class="content-section">
-    <div class="container">
-      <!-- Hero Section khusus Beli Token -->
-      <section class="hero">
-        <div class="container hero-container">
-          <h1 class="hero-title">Beli Token ArtToken</h1>
-          <p class="hero-subtitle">Masukkan jumlah token yang ingin Anda beli dan ikuti instruksi transaksi.</p>
-          <button id="heroConnectBtnBuy" class="btn hero-btn">Connect Wallet</button>
+    <!-- BAGIAN 8.1: Marquee / Ticker -->
+    <div class="ticker">
+      <div class="ticker__wrap">
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+        <span class="ticker__item">Silakan Beli Token ART Token</span>
+      </div>
+    </div>
+    <div class="pair-card">
+      <!-- Ikon koin, misal BTC atau ART -->
+      <img src="Token.png" alt="ART" class="pair-icon" />
+      <!-- Label pair (BTC/IDR, ART/IDR, dsb.) -->
+      <span class="pair-label">ART/ETH</span>
+      <div class="mini-calculator">
+        <input type="number" id="artAmount" placeholder="ART" />
+        <span class="arrow">⇄</span>
+        <input type="number" id="ethAmount" placeholder="ETH" />
+      </div>      
+    </div>
+    
+    <!-- BAGIAN 8.2: Layout Grid (Chart, Order Book, Beli Token) -->
+    <div class="exchange-layout">
+      <!-- Kolom Kiri: Chart -->
+      <div class="chart-area">
+        <h2>Aktivitas Token</h2>
+        <canvas id="transactionChart"></canvas>
+      </div>
+    
+      <!-- Kolom Tengah: Order Book -->
+      <div class="order-book">
+        <h2>Order Book</h2>
+        <div class="orderbook-container">
+          <table id="orderbookTable" class="orderbook-table">
+            <thead>
+              <tr>
+                <th>Waktu</th>
+                <th>Alamat</th>
+                <th>Jumlah Token</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data order book akan dimuat dinamis -->
+            </tbody>
+          </table>
         </div>
-      </section>
-      <!-- Konten Utama -->
-      <main class="container">
-        <section class="cards-section">
-          <!-- Card Beli Token -->
-          <div class="card">
+      </div>
+    
+      <!-- Kolom Kanan: Card dengan Tabs (Beli Token & Cek Saldo) -->
+      <div class="forms-panel">
+        <!-- Card yang menampung tab dan konten form -->
+        <div class="card-with-tabs">
+          <!-- Bagian tab (Beli dan Cek Saldo) -->
+          <div class="tab-pill">
+            <button class="tab-btn active" id="tabBeli">Beli</button>
+            <button class="tab-btn" id="tabCekSaldo">Cek Saldo</button>
+          </div>
+      
+          <!-- Konten Form Beli Token -->
+          <div id="formBeli" class="tab-content active">
             <h2>Beli Token</h2>
+            <div class="input-container">
+            </div>
             <label for="tokenAmount">Jumlah Token:</label>
-            <input type="number" id="tokenAmount" placeholder="Contoh: 1 untuk 1 token">
+            <input type="number" id="tokenAmount" placeholder="Contoh: 1 untuk 1 token" />
             <button id="buyTokenBtn" class="btn">Beli Token</button>
             <p id="status" class="status-msg"></p>
           </div>
-          <!-- Card Cek Saldo -->
-          <div class="card">
+      
+          <!-- Konten Form Cek Saldo -->
+          <div id="formCekSaldo" class="tab-content">
             <h2>Cek Saldo</h2>
             <button id="checkBalanceBtn" class="btn">Cek Saldo</button>
             <p id="balanceDisplay" class="status-msg">Saldo token: 0</p>
           </div>
-        </section>
-      </main>
+        </div>
+      </div>
+  </section>
+
+  <!-- BAGIAN 9: Section Tutorial -->
+  <section id="tutorial-section" class="content-section">
+    <section class="hero hero-tutorial" data-aos="fade-up">
+      <div class="hero-container">
+        <h1 class="hero-title">Tutorial Connect Wallet</h1>
+        <p class="hero-subtitle">Panduan menghubungkan wallet di perangkat Mobile dan PC.</p>
+      </div>
+    </section>
+    <div class="tutorial-content container" data-aos="fade-up">
+      <div class="tutorial-videos">
+        <div class="tutorial-mobile">
+          <h3>Mobile</h3>
+          <video width="320" height="240" controls>
+            <source src="path/to/mobile-tutorial.mp4" type="video/mp4" />
+            Browser Anda tidak mendukung pemutaran video.
+          </video>
+        </div>
+        <div class="tutorial-pc">
+          <h3>PC</h3>
+          <video width="320" height="240" controls>
+            <source src="Video.mp4" type="video/mp4" />
+            Browser Anda tidak mendukung pemutaran video.
+          </video>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
+  
+<!-- SECTION CryptoAI (Hanya muncul saat menu CryptoAI dipilih) -->
+<section id="ai-section" class="content-section">
+  <div class="ai-layout">
+    
+    <!-- Tombol / ikon untuk membuka riwayat (jika mau side-drawer) -->
+    <button class="history-toggle-btn">Riwayat</button>
+    
+    <!-- Sidebar Riwayat Chat, default tersembunyi (mis. pakai transform) -->
+    <aside class="chat-history-sidebar">
+      <div class="history-group">
+        <div class="history-date">Hari ini</div>
+        <ul class="history-list">
+          <li class="history-item">Pertanyaan 1</li>
+          <li class="history-item">Pertanyaan 2</li>
+        </ul>
+      </div>
+      <!-- ... group lain ... -->
+    </aside>
+    
+    <!-- Container Chat -->
+    <div class="chatgpt-container">
+      <!-- Bagian “Apa yang bisa saya bantu?” + tombol aksi cepat -->
+      <div class="chatgpt-welcome">
+        <h2 class="welcome-text">Apa yang bisa saya bantu?</h2>
+        <div class="quick-actions">
+          <button class="quick-btn">Create image</button>
+          <button class="quick-btn">Summarize text</button>
+          <button class="quick-btn">Make a plan</button>
+          <button class="quick-btn">Lainnya</button>
+        </div>
+      </div>
+      
+      <!-- Daftar pesan chat -->
+      <div class="chatgpt-messages">
+        <!-- Pesan (bot/user) akan muncul di sini -->
+      </div>
+      
+      <!-- Bar input di bawah -->
+      <div class="chatgpt-input">
+        <!-- Hapus tombol plus-btn, reason-btn, mic-btn -->
+        <input type="text" class="chat-input" placeholder="Ketik pesan ChatGPT" />
+        <button class="icon-button send-btn" onclick="sendQuestion()">Kirim</button>
+
+      </div>    
+  </div>
+</section>
+
+
+  
+  <!-- BAGIAN 10: Footer -->
+  <footer class="footer" data-aos="fade-up">
     <div class="container">
-      <p>&copy; 2025 ArtToken Marketplace</p>
+      <p>&copy; 2025 ArtToken Marketplace. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- Sertakan library Ethers dan file JavaScript -->
+  <!-- BAGIAN 11: Library Ethers.js & AOS & JS -->
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
   <script src="UITokenKaryaSeni.js"></script>
+  
+  <!-- BAGIAN 12: Inisialisasi AOS & Kode JavaScript Lainnya -->
   <script>
-    // JavaScript untuk navigasi antar section
-    const homeLink = document.getElementById('homeLink');
-    const buyLink = document.getElementById('buyLink');
-    const homeSection = document.getElementById('home-section');
-    const buySection = document.getElementById('buy-section');
+    // Inisialisasi AOS
+    AOS.init();
 
-    homeLink.addEventListener('click', function(e) {
+    const tabBeli = document.getElementById("tabBeli");
+    const tabCekSaldo = document.getElementById("tabCekSaldo");
+    const formBeli = document.getElementById("formBeli");
+    const formCekSaldo = document.getElementById("formCekSaldo");
+
+    function showTab(tab) {
+      // Reset semua tab & konten
+      tabBeli.classList.remove("active");
+      tabCekSaldo.classList.remove("active");
+      formBeli.classList.remove("active");
+      formCekSaldo.classList.remove("active");
+
+      // Aktifkan tab & konten sesuai parameter
+      if (tab === "beli") {
+        tabBeli.classList.add("active");
+        formBeli.classList.add("active");
+      } else {
+        tabCekSaldo.classList.add("active");
+        formCekSaldo.classList.add("active");
+      }
+    }
+
+    // Event listener tombol
+    tabBeli.addEventListener("click", () => showTab("beli"));
+    tabCekSaldo.addEventListener("click", () => showTab("saldo"));
+
+    // Tampilkan tab "Beli" secara default
+    showTab("beli");
+
+    const newsLink = document.getElementById("newsLink");
+    const newsSection = document.getElementById("news-section");
+
+    // Pastikan buySection, homeSection, tutorialSection sudah dideklarasi
+    const homeSection = document.getElementById("home-section");
+    const buySection = document.getElementById("buy-section");
+    const tutorialSection = document.getElementById("tutorial-section");
+
+    // Event listener link News
+    homeLink.addEventListener("click", function(e) {
       e.preventDefault();
-      homeSection.classList.add('active');
-      buySection.classList.remove('active');
-      homeLink.classList.add('active');
-      buyLink.classList.remove('active');
+      // Tampilkan home, sembunyikan lainnya
+      homeSection.classList.add("active");
+      buySection.classList.remove("active");
+      tutorialSection.classList.remove("active");
+      newsSection.classList.remove("active");
+    
+      // Link home jadi active, link lain non-active
+      homeLink.classList.add("active");
+      buyLink.classList.remove("active");
+      tutorialLink.classList.remove("active");
+      newsLink.classList.remove("active"); // Pastikan remove
+    });
+    
+    buyLink.addEventListener("click", function(e) {
+      e.preventDefault();
+      // Tampilkan buy, sembunyikan lainnya
+      buySection.classList.add("active");
+      homeSection.classList.remove("active");
+      tutorialSection.classList.remove("active");
+      newsSection.classList.remove("active");
+    
+      // Link buy jadi active, link lain non-active
+      buyLink.classList.add("active");
+      homeLink.classList.remove("active");
+      tutorialLink.classList.remove("active");
+      newsLink.classList.remove("active"); // Pastikan remove
+    });
+    
+    // ... Begitu juga untuk tutorialLink
+    tutorialLink.addEventListener("click", function(e) {
+      e.preventDefault();
+      tutorialSection.classList.add("active");
+      homeSection.classList.remove("active");
+      buySection.classList.remove("active");
+      newsSection.classList.remove("active");
+    
+      tutorialLink.classList.add("active");
+      homeLink.classList.remove("active");
+      buyLink.classList.remove("active");
+      newsLink.classList.remove("active"); // Pastikan remove
+    });
+    
+    function renderNews(articles) {
+      const newsList = document.getElementById("newsList");
+      newsList.innerHTML = "";
+      articles.forEach(article => {
+        const div = document.createElement("div");
+        div.classList.add("news-item");
+        div.innerHTML = `
+          <h3>${article.title}</h3>
+          <p>${article.description || "Deskripsi tidak tersedia."}</p>
+          <a href="${article.url}" target="_blank">Baca Selengkapnya</a>
+        `;
+        newsList.appendChild(div);
+      });
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      fetchNews();
+    });
+    
+    // Array daftar gambar hero yang akan ditampilkan
+    const images = [
+      'hq720.jpg',
+      'images (1).jpg',
+      'images.jpg'
+    ];
+    
+    let currentIndex = 0;
+    const heroImage = document.querySelector('.news-hero-img');
+  
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      const aboutTokenBtn = document.getElementById("aboutTokenBtn");
+      const pdfModal = document.getElementById("pdfModal");
+      const closeModal = document.getElementById("closeModal");
+      const pdfIframe = document.getElementById("pdfIframe");
+      
+      // URL file PDF (ganti dengan path yang sesuai)
+      const pdfURL = "Blueprint Projek Token  V1 04 Feb 2025 - Copy.pdf";
+
+      // Ketika tombol About Token diklik, set src dan tampilkan modal
+      aboutTokenBtn.addEventListener("click", function() {
+        pdfIframe.src = pdfURL;
+        pdfModal.style.display = "block";
+      });
+
+      // Tutup modal ketika tombol close diklik
+      closeModal.addEventListener("click", function() {
+        pdfModal.style.display = "none";
+        pdfIframe.src = ""; // Menghapus src agar PDF tidak dimuat di background
+      });
+
+      // Tutup modal jika klik di luar area modal
+      window.addEventListener("click", function(event) {
+        if (event.target === pdfModal) {
+          pdfModal.style.display = "none";
+          pdfIframe.src = "";
+        }
+      });
     });
 
-    buyLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      buySection.classList.add('active');
-      homeSection.classList.remove('active');
-      buyLink.classList.add('active');
-      homeLink.classList.remove('active');
-    });
+    // Conversion: 1 token = 0.0000001 ETH
+  const conversionRate = 0.0000001;
+  const artInput = document.getElementById("artAmount");
+  const ethInput = document.getElementById("ethAmount");
+
+  // Saat nilai ART berubah, hitung nilai ETH
+  artInput.addEventListener("input", () => {
+    const artVal = parseFloat(artInput.value);
+    if (!isNaN(artVal)) {
+      ethInput.value = (artVal * conversionRate).toFixed(10); // Tampilkan hingga 10 desimal
+    } else {
+      ethInput.value = "";
+    }
+  });
+
+  // Saat nilai ETH berubah, hitung nilai ART
+  ethInput.addEventListener("input", () => {
+    const ethVal = parseFloat(ethInput.value);
+    if (!isNaN(ethVal) && conversionRate !== 0) {
+      artInput.value = (ethVal / conversionRate).toFixed(2);
+    } else {
+      artInput.value = "";
+    }
+  });
+
+  // AI Chat
+  document.addEventListener("DOMContentLoaded", function() {
+    // ============== 1. Kode Hamburger Menu ==============
+    const hamburgerBtn = document.querySelector('.hamburger-btn');
+    const nav = document.querySelector('.nav');
+    
+    if (!hamburgerBtn || !nav) {
+      console.error('Element .hamburger-btn atau .nav tidak ditemukan!');
+    } else {
+      // Toggle menu saat hamburger diklik
+      hamburgerBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        nav.classList.toggle('active');
+      });
+      
+      // Tutup menu jika klik di luar nav-container
+      document.addEventListener('click', function(event) {
+        if (!event.target.closest('.nav-container')) {
+          nav.classList.remove('active');
+        }
+      });
+    }
+  
+    // ============== 2. Kode Navigasi Section ==============
+    const homeSection = document.getElementById("home-section");
+    const buySection = document.getElementById("buy-section");
+    const tutorialSection = document.getElementById("tutorial-section");
+    const aiSection = document.getElementById("ai-section");
+  
+    const homeLink = document.getElementById("homeLink");
+    const buyLink = document.getElementById("buyLink");
+    const tutorialLink = document.getElementById("tutorialLink");
+    const aiLink = document.getElementById("aiLink");
+  
+    // Fungsi untuk menyembunyikan semua section & menghapus kelas active link
+    function clearActive() {
+      homeSection.classList.remove("active");
+      buySection.classList.remove("active");
+      tutorialSection.classList.remove("active");
+      aiSection.classList.remove("active");
+  
+      homeLink.classList.remove("active");
+      buyLink.classList.remove("active");
+      tutorialLink.classList.remove("active");
+      aiLink.classList.remove("active");
+    }
+  
+    if (homeLink) {
+      homeLink.addEventListener("click", function(e) {
+        e.preventDefault();
+        clearActive();
+        homeSection.classList.add("active");
+        homeLink.classList.add("active");
+      });
+    }
+  
+    if (buyLink) {
+      buyLink.addEventListener("click", function(e) {
+        e.preventDefault();
+        clearActive();
+        buySection.classList.add("active");
+        buyLink.classList.add("active");
+      });
+    }
+  
+    if (tutorialLink) {
+      tutorialLink.addEventListener("click", function(e) {
+        e.preventDefault();
+        clearActive();
+        tutorialSection.classList.add("active");
+        tutorialLink.classList.add("active");
+      });
+    }
+  
+    if (aiLink) {
+      aiLink.addEventListener("click", function(e) {
+        e.preventDefault();
+        clearActive();
+        aiSection.classList.add("active");
+        aiLink.classList.add("active");
+      });
+    }
+  });
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const historyToggleBtn = document.querySelector('.history-toggle-btn');
+    const sidebar = document.querySelector('.chat-history-sidebar');
+    
+    if (historyToggleBtn && sidebar) {
+      historyToggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+    }
+  });
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    const sendBtn = document.querySelector(".send-btn");
+    const chatInput = document.querySelector(".chat-input");
+    const chatMessages = document.querySelector(".chatgpt-messages");
+  
+    // Fungsi untuk menambahkan pesan ke area chat
+  });
+
+    function appendMessage(text, sender) {
+    const chatArea = document.querySelector('.chatgpt-messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('chat-message', sender);
+    messageDiv.innerHTML = `<div class="bubble">${text}</div>`;
+    chatArea.appendChild(messageDiv);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
+
   </script>
 </body>
 </html>
