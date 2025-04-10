@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistem Voting Terdesentralisasi</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Firebase SDK (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth-compat.js"></script>
+  <!-- ethers.js UMD build -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Sistem Voting Terdesentralisasi</h1>
+      <p>Voting tanpa ribet gas fee dan tanpa MetaMask!</p>
+    </header>
+    <nav id="navbar" style="display: none;">
+      <ul>
+        <li><a href="createPoll.html">Buat Voting</a></li>
+        <li><a href="results.html">Lihat Voting</a></li>
+        <li><a href="vote.html">Vote</a></li>
+      </ul>
+    </nav>    
+    <section class="auth-section">
+      <div class="form-box" id="registerBox">
+        <h2>Registrasi</h2>
+        <form id="registerForm">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" placeholder="contoh@domain.com" required>
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" placeholder="Masukkan password" required>
+          <button type="submit">Daftar</button>
+        </form>
+        <p id="regMessage" class="message"></p>
+      </div>
+
+      <div class="form-box" id="loginBox">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Email Anda" required>
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Password Anda" required>
+          <button type="submit">Login</button>
+        </form>
+        <p id="loginMessage" class="message"></p>
+      </div>
+    </section>
+
+    <!-- Form Voting -->
+    <div id="voteSection" style="display: none;">
+      <div class="form-box">
+        <h2>Voting</h2>
+        <form id="voteForm">
+          <label for="pollId">ID Poll</label>
+          <input type="number" id="pollId" placeholder="Masukkan ID Poll" required>
+          <label for="candidateId">ID Kandidat</label>
+          <input type="number" id="candidateId" placeholder="Masukkan ID Kandidat" required>
+          <button type="submit">Vote</button>
+        </form>
+        <p id="voteMessage" class="message"></p>
+      </div>
+    </section>
+  <script>
+    // Firebase Configuration (ganti dengan data proyek Anda)
+    const firebaseConfig = {
+      apiKey: " API firebase",
+      authDomain: "authdomain firebaseapp anda",
+      projectId: "nama projek firebase",
+      storageBucket: "storage bucket firebase",
+      messagingSenderId: "messaging sender id firebase",
+      appId: "app id firebase",
+      // measurementId: "YOUR_MEASUREMENT_ID" // Opsional
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // Jika user sudah login, tampilkan navbar
+        document.getElementById("navbar").style.display = "block";
+        
+        // Selain itu, jika ada bagian khusus untuk voting atau pembuatan poll,
+        // kamu juga bisa menampilkannya di sini.
+        document.getElementById("voteSection").style.display = "block";
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("registerForm").style.display = "none";
+
+        document.getElementById("createPollSection").style.display = "block";
+      } else {
+        // Jika user belum login, pastikan navbar dan fitur khusus disembunyikan
+        document.getElementById("navbar").style.display = "none";
+        document.getElementById("voteSection").style.display = "none";
+        document.getElementById("createPollSection").style.display = "none";
+      }
+    });
+    
+
+
+    document.getElementById("voteForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      if (!currentUser) {
+        document.getElementById("voteMessage").innerText = "Silahkan login terlebih dahulu untuk melakukan voting.";
+        return;
+      }
+      
+      // Lanjutkan proses voting...
+    });
+  </script>
+  <script src="vote1.js"></script>
+</body>
+</html>

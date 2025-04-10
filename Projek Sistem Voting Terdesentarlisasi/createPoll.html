@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Buat Poll Baru</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- ethers.js UMD build -->
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Buat Poll Baru</h1>
+    </header>
+    <section class="form-section">
+      <div class="form-box">
+        <form id="createPollForm">
+          <label for="pollTitle">Judul Poll</label>
+          <input type="text" id="pollTitle" placeholder="Masukkan judul poll" required>
+
+          <label for="candidates">Daftar Kandidat (pisahkan dengan koma)</label>
+          <textarea id="candidates" placeholder="Contoh: Alice, Bob, Charlie" required></textarea>
+
+          <label for="startTime">Waktu Mulai (UNIX timestamp)</label>
+          <input type="number" id="startTime" placeholder="Contoh: 1680326400" required>
+
+          <label for="endTime">Waktu Berakhir (UNIX timestamp)</label>
+          <input type="number" id="endTime" placeholder="Contoh: 1680330000" required>
+
+          <button type="submit">Buat Poll</button>
+        </form>
+        <p id="createPollMessage" class="message"></p>
+      </div>
+    </section>
+    <footer>
+      <nav>
+        <a href="index.html">Kembali ke Home</a>
+      </nav>
+    </footer>
+    <script src="createPoll.js"></script>
+  </div>
+</body>
+</html>
