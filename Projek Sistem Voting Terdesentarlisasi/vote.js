@@ -2,13 +2,14 @@
 console.log('ethers:', typeof ethers);
 // Firebase configuration (ganti dengan konfigurasi proyek Firebase Anda)
 const firebaseConfig = {
-  apiKey: "AIzaSyAmfQ6Vf-17VBmDOYT3giWPsocDpWt_dQs",
-  authDomain: "sistem-vote-terdesentralisasi.firebaseapp.com",
-  projectId: "sistem-vote-terdesentralisasi",
-  storageBucket: "sistem-vote-terdesentralisasi.firebasestorage.app",
-  messagingSenderId: "356442724704",
-  appId: "1:356442724704:web:1379eee5b5ffe30a466605"
-};
+      apiKey: " API firebase",
+      authDomain: "authdomain firebaseapp anda",
+      projectId: "nama projek firebase",
+      storageBucket: "storage bucket firebase",
+      messagingSenderId: "messaging sender id firebase",
+      appId: "app id firebase",
+      // measurementId: "YOUR_MEASUREMENT_ID" // Opsional
+    };
 
 // Inisialisasi Firebase
 firebase.initializeApp(firebaseConfig);
