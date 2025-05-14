@@ -97,7 +97,7 @@ def is_valid():
         response = {'massage': 'Houston, we have a problem. the blockchain is not valid.'}
     return jsonify(response), 200
 
-## Running The APP
+## Running The APPass
 app.run(host='0.0.0.0', port=5000)
 
 
